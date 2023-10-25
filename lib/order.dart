@@ -1,14 +1,14 @@
-import 'Hex.dart';
+import 'hex_code.dart';
 
 class Order {
   Hex hex;
-  double points;
+  int points;
   String quantityName;
   String unitName;
 
   Order({required this.hex, required this.points, required this.quantityName, required this.unitName});
 
-  void change(Hex hex, double points, String quantityName, String unitName, {required hex}) {
+  void change(Hex hex, int points, String quantityName, String unitName) {
     this.hex = hex;
     this.points = points;
     this.quantityName = quantityName;

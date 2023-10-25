@@ -1,7 +1,8 @@
-import 'dart:js_util';
 import 'dart:math';
-import 'Hex.dart';
+import 'hex_code.dart';
 import 'order.dart';
+import 'constants.dart';
+import 'unit.dart';
 
 class Board {
   static final List<List<int>> compatibility = [
@@ -14,35 +15,36 @@ class Board {
     [3, 4, 5], // Hex 6
   ];
 
-  List<Hex> hexes = [Hex(), Hex(),Hex(),Hex(),Hex(),Hex(),Hex()];
+  List<Hex> hexes = [Hex(), Hex(), Hex(), Hex(meter: 1), Hex(), Hex(), Hex()];
   //List<Order> orders = [Order(), Order(), Order()];
-  Order order = Order(hex: Hex, points: points, quantityName: quantityName, unitName: unitName)
-  int score;
-  int moveCount;
-  int orderCount;
+  late List<Order> orders = [
+    Order(hex: Hex(meter: 1), points: 1, quantityName: 'length', unitName: 'meter'),
+    Order(hex: Hex(meter: 1), points: 1, quantityName: 'length', unitName: 'meter'),
+    Order(hex: Hex(meter: 1), points: 1, quantityName: 'length', unitName: 'meter'),
+  ];
+  int score = 0;
+  int moveCount = 0;
+  int orderCount = 0;
 
-  Board({}) {
-    score = 0;
-    moveCount = 0;
-    orderCount = 0;
-  }
+  Board();
 
   void refreshOrder(int orderIndex) {
     score += orders[orderIndex].points;
 
-    final newUnit = derivedUnits[Random().nextInt(derivedUnits.length)];
+    Unit newUnit = derivedUnits[Random().nextInt(derivedUnits.length)];
     orders[orderIndex].change(
-      hex: newUnit.hex,
-      points: newUnit.hex.difficulty(),
-      quantityName: newUnit.quantity,
-      unitName: newUnit.name,
+      newUnit.hex,
+      newUnit.hex.difficulty(),
+      newUnit.quantity,
+      newUnit.name,
     );
   }
 
   void addHex() {
     // First check that there are spaces to spawn a thing.
     var available = false;
-    final availableIndexes = <int>[];
+
+    List<int> availableIndexes = [];
     for (var index = 0; index < 7; index++) {
       if (hexes[index].isClear()) {
         available = true;
@@ -52,13 +54,16 @@ class Board {
 
     if (!available) {
       print('game over');
+      return;
       // You may want to handle the game over logic here.
     }
 
-    final spawnIndex = availableIndexes[Random().nextInt(availableIndexes.length)];
-    final newUnit = baseUnits[Random().nextInt(baseUnits.length)];
+    final int spawnIndex = availableIndexes[Random().nextInt(availableIndexes.length)];
+    final Unit newUnit = baseUnits[Random().nextInt(baseUnits.length)];
 
-    hexes[spawnIndex].change(
+    print(newUnit.hex.toString());
+
+    hexes[spawnIndex] = Hex(
       second: newUnit.hex.second,
       meter: newUnit.hex.meter,
       kilogram: newUnit.hex.kilogram,

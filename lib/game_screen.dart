@@ -18,6 +18,7 @@ class GameScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Container(
+              color: Colors.amber,
               child: Center(
                 child: Text('temp'),
               ),
@@ -30,15 +31,15 @@ class GameScreen extends StatelessWidget {
 }
 
 //This
-class hexBoardDisplay extends StatefulWidget {
-  double radius;
-  hexBoardDisplay({super.key, required this.radius});
+class HexBoardDisplay extends StatefulWidget {
+  final double radius;
+  const HexBoardDisplay({super.key, required this.radius});
 
   @override
-  State<hexBoardDisplay> createState() => _hexBoardDisplayState();
+  State<HexBoardDisplay> createState() => _HexBoardDisplayState();
 }
 
-class _hexBoardDisplayState extends State<hexBoardDisplay> {
+class _HexBoardDisplayState extends State<HexBoardDisplay> {
   @override
   Widget build(BuildContext context) {
     return Stack(
