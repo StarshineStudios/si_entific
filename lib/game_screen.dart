@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hexagon/hexagon.dart';
+import 'hexagon_grid_widget.dart';
 
 class GameScreen extends StatelessWidget {
   const GameScreen({super.key});
@@ -14,17 +15,7 @@ class GameScreen extends StatelessWidget {
         title: Text('Your Game Title'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Container(
-              color: Colors.amber,
-              child: Center(
-                child: Text('temp'),
-              ),
-            ),
-          ],
-        ),
+        child: HexGrid(),
       ),
     );
   }

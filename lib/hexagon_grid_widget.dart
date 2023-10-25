@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:hexagon/hexagon.dart';
 import 'board.dart';
+import 'order.dart';
 
 class HexGrid extends StatefulWidget {
   const HexGrid({super.key});
@@ -13,7 +14,7 @@ class HexGrid extends StatefulWidget {
 
 class _HexGridState extends State<HexGrid> {
   Board board = Board();
-  double radius = 30;
+  double radius = 60;
 
   int selectedIndex = -1;
   int polarity = 0; // -1 is dividing, 0 is not selected, 1 is
@@ -62,41 +63,65 @@ class _HexGridState extends State<HexGrid> {
     print(selectedIndex);
   }
 
+  void manageOrder(int orderIndex) {
+    if (selectedIndex != -1) {
+      board.processOrder(orderIndex, selectedIndex);
+      selectedIndex = -1;
+      polarity = 0;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        // Text('Score: ${board.score}'),
-        // Text('Moves: ${board.moveCount}'),
-        // Column(
-        //   children: board.orders.map((order) {
-        //     return _buildOrder(order.toString());
-        //   }).toList(),
-        // ),
-        Center(
-          child: Stack(
-            children: <Widget>[
-              _buildHexagon(1.5 * radius, -0.86602540378 * radius, board.hexes[0].toString(), 0),
-              _buildHexagon(0, -2 * 0.86602540378 * radius, board.hexes[1].toString(), 1),
-              _buildHexagon(1.5 * radius, 0.86602540378 * radius, board.hexes[2].toString(), 2),
-              _buildHexagon(0, 0, board.hexes[3].toString(), 3),
-              _buildHexagon(-1.5 * radius, -0.86602540378 * radius, board.hexes[4].toString(), 4),
-              _buildHexagon(0, 2 * 0.86602540378 * radius, board.hexes[5].toString(), 5),
-              _buildHexagon(-1.5 * radius, 0.86602540378 * radius, board.hexes[6].toString(), 6),
-            ],
-          ),
+        Text('Score: ${board.score}'),
+        Text('Moves: ${board.moveCount}'),
+        Column(
+          children: board.orders.asMap().entries.map((entry) {
+            int index = entry.key;
+            Order order = entry.value;
+            return _buildOrder(order.toString(), index);
+          }).toList(),
         ),
+        Center(
+          child: Container(
+            constraints: BoxConstraints.expand(width: 0.86602540378 * radius * 6, height: radius * 6), // Set yourWidth and yourHeight accordingly
+            color: Colors.amber,
+            child: Stack(
+              children: <Widget>[
+                _buildHexagon(1.5 * radius, -0.86602540378 * radius, board.hexes[0].toString(), 0),
+                _buildHexagon(0, -2 * 0.86602540378 * radius, board.hexes[1].toString(), 1),
+                _buildHexagon(1.5 * radius, 0.86602540378 * radius, board.hexes[2].toString(), 2),
+                _buildHexagon(0, 0, board.hexes[3].toString(), 3),
+                _buildHexagon(-1.5 * radius, -0.86602540378 * radius, board.hexes[4].toString(), 4),
+                _buildHexagon(0, 2 * 0.86602540378 * radius, board.hexes[5].toString(), 5),
+                _buildHexagon(-1.5 * radius, 0.86602540378 * radius, board.hexes[6].toString(), 6),
+              ],
+            ),
+          ),
+        )
       ],
     );
   }
 
-  Widget _buildOrder(String label) {
-    return Container(
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(40), color: Colors.amber),
-      child: Text(
-        label,
-        style: TextStyle(fontSize: 10),
+  Widget _buildOrder(String label, int orderIndex) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          manageOrder(orderIndex);
+        });
+      },
+      child: Container(
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(7), color: Colors.amber),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            label,
+            style: TextStyle(fontSize: 10),
+          ),
+        ),
       ),
     );
   }

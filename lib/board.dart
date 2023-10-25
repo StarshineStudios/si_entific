@@ -28,16 +28,20 @@ class Board {
 
   Board();
 
-  void refreshOrder(int orderIndex) {
-    score += orders[orderIndex].points;
+  void processOrder(int orderIndex, int hexIndex) {
+    //JUST A TEMPORARY SOLUTION TO CONVERT TO STRINGS
+    if (hexes[hexIndex].toString() == orders[orderIndex].hex.toString()) {
+      score += orders[orderIndex].points;
 
-    Unit newUnit = derivedUnits[Random().nextInt(derivedUnits.length)];
-    orders[orderIndex].change(
-      newUnit.hex,
-      newUnit.hex.difficulty(),
-      newUnit.quantity,
-      newUnit.name,
-    );
+      Unit newUnit = derivedUnits[Random().nextInt(derivedUnits.length)];
+      orders[orderIndex].change(
+        newUnit.hex,
+        newUnit.hex.difficulty(),
+        newUnit.quantity,
+        newUnit.name,
+      );
+      hexes[hexIndex].clear();
+    }
   }
 
   void addHex() {

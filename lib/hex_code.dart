@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'constants.dart';
+import 'unit.dart';
 
 class Hex {
   int second;
@@ -136,24 +137,24 @@ class Hex {
     candela = other.candela - candela;
   }
 
-  // @override
-  // bool operator ==(Object hex) {
-  //   if (hex is Hex) {
-  //     return meter == hex.meter &&
-  //         kilogram == hex.kilogram &&
-  //         second == hex.second &&
-  //         ampere == hex.ampere &&
-  //         kelvin == hex.kelvin &&
-  //         mole == hex.mole &&
-  //         candela == hex.candela;
-  //   }
-  //   return false;
-  // }
+  @override
+  bool operator ==(Object other) {
+    if (other is Hex) {
+      return meter == other.meter &&
+          kilogram == other.kilogram &&
+          second == other.second &&
+          ampere == other.ampere &&
+          kelvin == other.kelvin &&
+          mole == other.mole &&
+          candela == other.candela;
+    }
+    return false;
+  }
 
   @override
   String toString() {
     //check if it matches a derived unit
-    for (var unit in derivedUnits) {
+    for (Unit unit in derivedUnits) {
       if (this == unit.hex) {
         return unit.symbol;
       }
@@ -161,6 +162,19 @@ class Hex {
 
     var numerator = "";
     var denominator = "";
+
+    List<String> superscripts = [
+      '⁰',
+      '¹',
+      '²',
+      '³',
+      '⁴',
+      '⁵',
+      '⁶',
+      '⁷',
+      '⁸',
+      '⁹',
+    ];
 
     for (var unitAndSymbol in [
       [meter, "m"],
@@ -175,12 +189,8 @@ class Hex {
       final symbol = unitAndSymbol[1] as String;
       if (unit > 0) {
         if (unit > 1) {
-          if (unit == 4) {
-            numerator += "$symbol⁴·";
-          } else if (unit == 3) {
-            numerator += "$symbol³·";
-          } else if (unit == 2) {
-            numerator += "$symbol²·";
+          if (unit <= 9) {
+            numerator += "$symbol${superscripts[unit]}·";
           } else {
             numerator += "($symbol^$unit)·";
           }
@@ -212,7 +222,7 @@ class Hex {
     }
 
     if (denominator.isNotEmpty) {
-      return "$numerator\n${'—' * max(numerator.length, denominator.length)}\n$denominator";
+      return "$numerator\n${'―' * max(numerator.length, denominator.length)}\n$denominator";
     } else if (numerator.isNotEmpty) {
       return numerator;
     } else {
