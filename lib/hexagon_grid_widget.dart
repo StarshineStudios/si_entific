@@ -6,7 +6,7 @@ import 'package:hexagon/hexagon.dart';
 class HexagonGridWidget extends StatelessWidget {
   final double radius;
 
-  HexagonGridWidget({required this.radius});
+  const HexagonGridWidget({super.key, required this.radius});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class HexagonGridWidget extends StatelessWidget {
       left: offsetX + radius * sqrt(3),
       child: HexagonWidget.pointy(
         height: radius * 2,
-        color: Color.fromARGB(255, 191, 211, 206),
+        color: const Color.fromARGB(255, 191, 211, 206),
         elevation: 4,
         child: const Text('1'),
       ),
@@ -44,9 +44,9 @@ void main() {
     MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Hexagon Grid Test'),
+          title: const Text('Hexagon Grid Test'),
         ),
-        body: Center(
+        body: const Center(
           child: HexagonGridWidget(radius: 30.0), // Adjust the radius as needed
         ),
       ),

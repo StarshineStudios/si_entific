@@ -1,8 +1,7 @@
+import 'dart:js_util';
 import 'dart:math';
 import 'Hex.dart';
 import 'order.dart';
-import 'constants.dart';
-import 'package:flutter/material.dart';
 
 class Board {
   static final List<List<int>> compatibility = [
@@ -15,23 +14,14 @@ class Board {
     [3, 4, 5], // Hex 6
   ];
 
-  List<Hex> hexes;
-  List<Order> orders;
+  List<Hex> hexes = [Hex(), Hex(),Hex(),Hex(),Hex(),Hex(),Hex()];
+  //List<Order> orders = [Order(), Order(), Order()];
+  Order order = Order(hex: Hex, points: points, quantityName: quantityName, unitName: unitName)
   int score;
   int moveCount;
   int orderCount;
 
-  Board({
-    Hex hex0,
-    Hex hex1,
-    Hex hex2,
-    Hex hex3,
-    Hex hex4,
-    Hex hex5,
-    Hex hex6,
-  }) {
-    hexes = [hex0, hex1, hex2, hex3, hex4, hex5, hex6];
-    orders = [Order(), Order(), Order()];
+  Board({}) {
     score = 0;
     moveCount = 0;
     orderCount = 0;

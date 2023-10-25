@@ -9,14 +9,15 @@ class Hex {
   double mole;
   double candela;
 
-  Hex({
-    this.second = 0,
-    this.meter = 0,
-    this.kilogram = 0,
-    this.ampere = 0,
-    this.kelvin = 0,
-    this.mole = 0,
-    this.candela = 0,
+  Hex(
+    int i, {
+    this.second = 0.0,
+    this.meter = 0.0,
+    this.kilogram = 0.0,
+    this.ampere = 0.0,
+    this.kelvin = 0.0,
+    this.mole = 0.0,
+    this.candela = 0.0,
   });
 
   void change({
@@ -52,23 +53,11 @@ class Hex {
   }
 
   bool isClear() {
-    return meter == 0 &&
-        kilogram == 0 &&
-        second == 0 &&
-        ampere == 0 &&
-        kelvin == 0 &&
-        mole == 0 &&
-        candela == 0;
+    return meter == 0 && kilogram == 0 && second == 0 && ampere == 0 && kelvin == 0 && mole == 0 && candela == 0;
   }
 
   double difficulty() {
-    return (second.abs() +
-        meter.abs() +
-        kilogram.abs() +
-        ampere.abs() +
-        kelvin.abs() +
-        mole.abs() +
-        candela.abs());
+    return (second.abs() + meter.abs() + kilogram.abs() + ampere.abs() + kelvin.abs() + mole.abs() + candela.abs());
   }
 
   void addMeter() {

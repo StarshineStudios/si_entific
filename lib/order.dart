@@ -8,7 +8,7 @@ class Order {
 
   Order({required this.hex, required this.points, required this.quantityName, required this.unitName});
 
-  void change(Hex hex, double points, String quantityName, String unitName) {
+  void change(Hex hex, double points, String quantityName, String unitName, {required hex}) {
     this.hex = hex;
     this.points = points;
     this.quantityName = quantityName;
@@ -21,9 +21,7 @@ class Order {
 
   @override
   String toString() {
-    if (unitName != null) {
-      return "Create a\n$unitName,\nthe unit for\n$quantityName";
-    }
-    return "Create the unit for\n$quantityName";
+    return "Create a\n$unitName,\nthe unit for\n$quantityName";
+    // return "Create the unit for\n$quantityName";
   }
 }
