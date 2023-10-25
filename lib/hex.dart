@@ -1,23 +1,22 @@
 import 'dart:math';
 
 class Hex {
-  double second;
-  double meter;
-  double kilogram;
-  double ampere;
-  double kelvin;
-  double mole;
-  double candela;
+  // double second;
+  // double meter;
+  // double kilogram;
+  // double ampere;
+  // double kelvin;
+  // double mole;
+  // double candela;
 
-  Hex(
-    int i, {
-    this.second = 0.0,
-    this.meter = 0.0,
-    this.kilogram = 0.0,
-    this.ampere = 0.0,
-    this.kelvin = 0.0,
-    this.mole = 0.0,
-    this.candela = 0.0,
+  Hex({
+    double second = 0.0,
+    double meter = 0.0,
+    double kilogram = 0.0,
+    double ampere = 0.0,
+    double kelvin = 0.0,
+    double mole = 0.0,
+    double candela = 0.0,
   });
 
   void change({
