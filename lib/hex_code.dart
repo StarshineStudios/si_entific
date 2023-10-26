@@ -1,4 +1,6 @@
 import 'dart:math';
+import 'package:flutter/material.dart';
+
 import 'constants.dart';
 import 'unit.dart';
 
@@ -152,6 +154,146 @@ class Hex {
     return false;
   }
 
+  Color getColor() {
+    List<Color> colors = [];
+    for (var unitAndColor in [
+      [second.abs(), color1],
+      [meter.abs(), color2],
+      [kilogram.abs(), color3],
+      [ampere.abs(), color4],
+      [kelvin.abs(), color5],
+      [mole.abs(), color6],
+      [candela.abs(), color7],
+    ]) {
+      for (int i = 0; i < (unitAndColor[0] as int); i++) {
+        colors.add(unitAndColor[1] as Color);
+      }
+    }
+    if (colors.isEmpty) {
+      return paleTeal;
+    } else {
+      return averageColor(colors);
+    }
+  }
+
+  Color averageColor(List<Color> colorList) {
+    if (colorList.isEmpty) {
+      // Return a default color if the list is empty
+      return Colors.black;
+    }
+
+    int totalRed = 0;
+    int totalGreen = 0;
+    int totalBlue = 0;
+
+    for (Color color in colorList) {
+      totalRed += color.red;
+      totalGreen += color.green;
+      totalBlue += color.blue;
+    }
+
+    int averageRed = totalRed ~/ colorList.length; // Use ~/ for integer division
+    int averageGreen = totalGreen ~/ colorList.length;
+    int averageBlue = totalBlue ~/ colorList.length;
+
+    return Color.fromARGB(
+      255, // Alpha value, typically 255 for fully opaque
+      averageRed,
+      averageGreen,
+      averageBlue,
+    );
+  }
+
+  void main() {
+    // Example usage
+    List<Color> colors = [
+      Colors.red,
+      Colors.green,
+      Colors.blue,
+    ];
+
+    Color avgColor = averageColor(colors);
+    print('Average Color: $avgColor');
+  }
+  // double fontSize() {
+  //   //check if it matches a derived unit
+  //   for (Unit unit in derivedUnits) {
+  //     if (this == unit.hex) {
+  //       return lengthToFontSize(unit.symbol.length);
+  //     }
+  //   }
+
+  //   var numerator = "";
+  //   var denominator = "";
+
+  //   List<String> superscripts = [
+  //     '⁰',
+  //     '¹',
+  //     '²',
+  //     '³',
+  //     '⁴',
+  //     '⁵',
+  //     '⁶',
+  //     '⁷',
+  //     '⁸',
+  //     '⁹',
+  //   ];
+
+  //   for (var unitAndSymbol in [
+  //     [meter, "m"],
+  //     [kilogram, "kg"],
+  //     [second, "s"],
+  //     [ampere, "A"],
+  //     [kelvin, "K"],
+  //     [mole, "mol"],
+  //     [candela, "cd"]
+  //   ]) {
+  //     final unit = unitAndSymbol[0] as int;
+  //     final symbol = unitAndSymbol[1] as String;
+  //     if (unit > 0) {
+  //       if (unit > 1) {
+  //         if (unit <= 9) {
+  //           numerator += "$symbol${superscripts[unit]}·";
+  //         } else {
+  //           numerator += "($symbol^$unit)·";
+  //         }
+  //       } else {
+  //         numerator += "$symbol·";
+  //       }
+  //     } else if (unit < 0) {
+  //       if (unit < -1) {
+  //         if (unit == -4) {
+  //           denominator += "$symbol⁴·";
+  //         } else if (unit == -3) {
+  //           denominator += "$symbol³·";
+  //         } else if (unit == -2) {
+  //           denominator += "$symbol²·";
+  //         } else {
+  //           denominator += "($symbol^${-1 * unit})·";
+  //         }
+  //       } else {
+  //         denominator += "$symbol·";
+  //       }
+  //     }
+  //   }
+
+  //   if (numerator.isNotEmpty) {
+  //     numerator = numerator.substring(0, numerator.length - 1);
+  //   }
+  //   if (denominator.isNotEmpty) {
+  //     denominator = denominator.substring(0, denominator.length - 1);
+  //   }
+
+  //   return denominator.length > numerator.length ? lengthToFontSize(denominator.length) : lengthToFontSize(numerator.length);
+  // }
+
+  // double lengthToFontSize(int length) {
+  //   //double averageHeightToWidthRatio = 3 / 2;
+  //   double hexWidth = 120;
+
+  //   return (hexWidth / (length.toDouble() + 6 / 7)); //* averageHeightToWidthRatio;
+  // }
+
   @override
   String toString() {
     //check if it matches a derived unit
@@ -200,12 +342,9 @@ class Hex {
         }
       } else if (unit < 0) {
         if (unit < -1) {
-          if (unit == -4) {
-            denominator += "$symbol⁴·";
-          } else if (unit == -3) {
-            denominator += "$symbol³·";
-          } else if (unit == -2) {
-            denominator += "$symbol²·";
+          int abs = unit.abs();
+          if (abs <= 9) {
+            denominator += "$symbol${superscripts[unit]}·";
           } else {
             denominator += "($symbol^${-1 * unit})·";
           }
@@ -222,8 +361,119 @@ class Hex {
       denominator = denominator.substring(0, denominator.length - 1);
     }
 
+    int lineCount = max(weightedLength(numerator), weightedLength(denominator)).toInt();
     if (denominator.isNotEmpty) {
-      return "$numerator\n${'―' * max(numerator.length, denominator.length)}\n$denominator";
+      if (numerator.isNotEmpty) {
+        return "$numerator\n${'━' * lineCount}\n$denominator";
+      } else {
+        return "1\n${'━' * lineCount}\n$denominator";
+      }
+    } else if (numerator.isNotEmpty) {
+      return numerator;
+    } else {
+      return "1";
+    }
+  }
+
+  double weightedLength(String text) {
+    double length = 0.0;
+
+    for (int i = 0; i < text.length; i++) {
+      String char = text[i];
+      if (char == '·' ||
+          char == '⁰' ||
+          char == '¹' ||
+          char == '²' ||
+          char == '³' ||
+          char == '⁴' ||
+          char == '⁵' ||
+          char == '⁶' ||
+          char == '⁷' ||
+          char == '⁸' ||
+          char == '⁹') {
+        length += 0.5;
+      } else {
+        length += 1.0;
+      }
+    }
+
+    return length;
+  }
+
+  @override
+  String toBaseUnits() {
+    //check if it matches a derived unit
+    // for (Unit unit in derivedUnits) {
+    //   if (this == unit.hex) {
+    //     return unit.symbol;
+    //   }
+    // }
+
+    var numerator = "";
+    var denominator = "";
+
+    List<String> superscripts = [
+      '⁰',
+      '¹',
+      '²',
+      '³',
+      '⁴',
+      '⁵',
+      '⁶',
+      '⁷',
+      '⁸',
+      '⁹',
+    ];
+
+    for (var unitAndSymbol in [
+      [meter, "m"],
+      [kilogram, "kg"],
+      [second, "s"],
+      [ampere, "A"],
+      [kelvin, "K"],
+      [mole, "mol"],
+      [candela, "cd"]
+    ]) {
+      final unit = unitAndSymbol[0] as int;
+      final symbol = unitAndSymbol[1] as String;
+      if (unit > 0) {
+        if (unit > 1) {
+          if (unit <= 9) {
+            numerator += "$symbol${superscripts[unit]}·";
+          } else {
+            numerator += "($symbol^$unit)·";
+          }
+        } else {
+          numerator += "$symbol·";
+        }
+      } else if (unit < 0) {
+        if (unit < -1) {
+          int abs = unit.abs();
+          if (abs <= 9) {
+            denominator += "$symbol${superscripts[abs]}·";
+          } else {
+            denominator += "($symbol^${-1 * unit})·";
+          }
+        } else {
+          denominator += "$symbol·";
+        }
+      }
+    }
+
+    if (numerator.isNotEmpty) {
+      numerator = numerator.substring(0, numerator.length - 1);
+    }
+    if (denominator.isNotEmpty) {
+      denominator = denominator.substring(0, denominator.length - 1);
+    }
+
+    int lineCount = max(weightedLength(numerator), weightedLength(denominator)).toInt();
+    if (denominator.isNotEmpty) {
+      if (numerator.isNotEmpty) {
+        return "$numerator\n${'━' * lineCount}\n$denominator";
+      } else {
+        return "1\n${'━' * lineCount}\n$denominator";
+      }
     } else if (numerator.isNotEmpty) {
       return numerator;
     } else {
@@ -231,6 +481,8 @@ class Hex {
     }
   }
 }
+
+
 
 // final List<List> derivedUnits = [
 //   ['Hertz', 'Hz', 'Frequency', Hex(second: -1, meter: 0, kilogram: 0, ampere: 0, kelvin: 0, mole: 0, candela: 0)],

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 // import 'package:google_fonts/google_fonts.dart';
 import 'package:hexagon/hexagon.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:si_entific/asteroid.dart';
 import 'package:si_entific/constants.dart';
+import 'package:si_entific/extra_screens.dart';
 import 'game_screen.dart';
 import 'rotator.dart';
 import 'pulser.dart';
 
 void main() async {
-  // await Hive.initFlutter();
-  // await Hive.openBox('generalBox');
+  await Hive.initFlutter();
+  await Hive.openBox('generalBox');
   runApp(const MyApp());
 }
 
@@ -46,34 +48,38 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: mediumTeal,
-      // appBar: AppBar(
-      //   backgroundColor: darkTeal,
-      //   title: Text(widget.title),
-      // ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Center(
-            child: Text(
-              'SI-ENTIFIC',
-              style: TextStyle(color: white, fontSize: 70),
-            ),
-          ),
-          Stack(
+    final double screenWidth = MediaQuery.of(context).size.width;
+    return ValueListenableBuilder(
+      valueListenable: Hive.box('generalBox').listenable(),
+      builder: (context, box, widget) {
+        int highscore = box.get('highscore', defaultValue: 0);
+        return Scaffold(
+          backgroundColor: mediumTeal,
+          // appBar: AppBar(
+          //   backgroundColor: darkTeal,
+          //   title: Text(widget.title),
+          // ),
+          body: Stack(
             children: [
               //Asteroid 1
-              const Stack(
-                children: [
-                  SpinnyAsteroid(50.0, 2.0, color1, 's', 50.0, true, Duration(seconds: 5)), // Set the initial X-position and falling speed
-                  SpinnyAsteroid(100.0, 1.5, color2, 'm', 40.0, false, Duration(seconds: 7)),
-                  SpinnyAsteroid(150.0, 2.5, color3, 'kg', 60.0, true, Duration(seconds: 4)),
-                  SpinnyAsteroid(200.0, 1.0, color4, 'A', 45.0, false, Duration(seconds: 8)),
-                  SpinnyAsteroid(250.0, 2.0, color5, 'K', 55.0, true, Duration(seconds: 3)),
-                  SpinnyAsteroid(150.0, 2.5, color3, 'mol', 60.0, false, Duration(seconds: 5)),
-                  SpinnyAsteroid(200.0, 1.0, color4, 'cd', 45.0, true, Duration(seconds: 4)),
-                ],
+
+              SpinnyAsteroid(50.0, 4 / 3, color1, 's', 60.0, true, const Duration(seconds: 5), screenWidth), // Set the initial X-position and falling speed
+              SpinnyAsteroid(100.0, 3 / 3, color2, 'm', 70.0, false, const Duration(seconds: 7), screenWidth),
+              SpinnyAsteroid(150.0, 5 / 3, color3, 'kg', 70.0, true, const Duration(seconds: 4), screenWidth),
+              SpinnyAsteroid(200.0, 7 / 3, color4, 'A', 65.0, false, const Duration(seconds: 8), screenWidth),
+              SpinnyAsteroid(250.0, 3.4 / 3, color5, 'K', 65.0, true, const Duration(seconds: 3), screenWidth),
+              SpinnyAsteroid(150.0, 2.5 / 3, color3, 'mol', 90.0, false, const Duration(seconds: 5), screenWidth),
+              SpinnyAsteroid(200.0, 4.0 / 3, color4, 'cd', 85.0, true, const Duration(seconds: 4), screenWidth),
+
+              Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [mediumTeal, mediumTealTransp, Transp, Transp, mediumTealTransp, mediumTeal],
+                    //stops: [0.25, 0.4, 0.6, 0.75],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                ),
               ),
 
               //HEX AND TITLE
@@ -128,12 +134,66 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                   ),
+                  Positioned(
+                    top: 100,
+                    child: Center(
+                      child: Text(
+                        'SI-ENTIFIC',
+                        style: TextStyle(color: white, fontSize: 70),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 130,
+                    child: Center(
+                      child: Text(
+                        'HIGHSCORE: $highscore',
+                        style: TextStyle(color: white, fontSize: 30),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 30,
+                    right: 30,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const SettingsScreen(),
+                          ),
+                        );
+                      },
+                      child: Icon(
+                        Icons.settings,
+                        size: 60,
+                        color: white,
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 30,
+                    left: 30,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const InfoScreen(),
+                          ),
+                        );
+                      },
+                      child: Icon(
+                        Icons.info,
+                        size: 60,
+                        color: white,
+                      ),
+                    ),
+                  )
                 ],
               ),
             ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:hexagon/hexagon.dart';
+import 'package:si_entific/constants.dart';
 import 'package:si_entific/rotator.dart';
 
 void main() {
@@ -28,14 +29,25 @@ class AsteroidStack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Stack(
+    final double screenWidth = MediaQuery.of(context).size.width;
+    return Stack(
       children: [
-        PositionedAsteroid(50.0, 2.0, Colors.red, "A", 50.0), // Set the initial X-position and falling speed
-        PositionedAsteroid(100.0, 1.5, Colors.green, "B", 40.0),
-        PositionedAsteroid(150.0, 2.5, Colors.blue, "C", 60.0),
-        PositionedAsteroid(200.0, 1.0, Colors.orange, "D", 45.0),
-        PositionedAsteroid(250.0, 2.0, Colors.purple, "E", 55.0),
+        SpinnyAsteroid(50.0, 2.0 / 2, color1, 's', 60.0, true, const Duration(seconds: 5), screenWidth), // Set the initial X-position and falling speed
+        SpinnyAsteroid(100.0, 1.5 / 2, color2, 'm', 70.0, false, const Duration(seconds: 7), screenWidth),
+        SpinnyAsteroid(150.0, 2.5 / 2, color3, 'kg', 70.0, true, const Duration(seconds: 4), screenWidth),
+        SpinnyAsteroid(200.0, 1.0 / 2, color4, 'A', 65.0, false, const Duration(seconds: 8), screenWidth),
+        SpinnyAsteroid(250.0, 2.0 / 2, color5, 'K', 65.0, true, const Duration(seconds: 3), screenWidth),
+        SpinnyAsteroid(150.0, 2.5 / 2, color3, 'mol', 90.0, false, const Duration(seconds: 5), screenWidth),
+        SpinnyAsteroid(200.0, 1.0 / 2, color4, 'cd', 85.0, true, const Duration(seconds: 4), screenWidth),
       ],
+
+      // [
+      //   PositionedAsteroid(50.0, 2.0, Colors.red, "A", 50.0), // Set the initial X-position and falling speed
+      //   PositionedAsteroid(100.0, 1.5, Colors.green, "B", 40.0),
+      //   PositionedAsteroid(150.0, 2.5, Colors.blue, "C", 60.0),
+      //   PositionedAsteroid(200.0, 1.0, Colors.orange, "D", 45.0),
+      //   PositionedAsteroid(250.0, 2.0, Colors.purple, "E", 55.0),
+      // ],
     );
   }
 }
@@ -78,12 +90,13 @@ class SpinnyAsteroid extends StatelessWidget {
   final double width;
   final bool clockwise;
   final Duration duration;
+  final double screenWidth;
 
-  const SpinnyAsteroid(this.initialX, this.fallingSpeed, this.color, this.text, this.width, this.clockwise, this.duration, {super.key});
+  const SpinnyAsteroid(this.initialX, this.fallingSpeed, this.color, this.text, this.width, this.clockwise, this.duration, this.screenWidth, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width; // Get the screen width
+    // Get the screen width
 
     return Asteroid(
       initialX: initialX,

@@ -21,7 +21,7 @@ class Order {
 
   @override
   String toString() {
-    return "Create a\n$unitName,\nthe unit for\n$quantityName";
+    return "Create a $unitName, the unit for $quantityName";
     // return "Create the unit for\n$quantityName";
   }
 }

@@ -3,17 +3,22 @@ import 'hex_code.dart';
 import 'unit.dart';
 
 const mediumTeal = Color.fromARGB(255, 33, 139, 130);
-const lightTeal = Color.fromARGB(255, 152, 212, 187);
+const mediumTealTransp = Color.fromARGB(125, 33, 139, 130);
+const Transp = Color.fromARGB(0, 0, 0, 0);
+
+const paleTeal = Color.fromARGB(255, 181, 211, 198);
+
+const lightTeal = Color.fromARGB(255, 131, 194, 168);
 const darkTeal = Color.fromARGB(255, 7, 71, 65);
 const white = Color.fromARGB(255, 255, 255, 255);
 
 const color1 = Color.fromARGB(255, 244, 109, 67);
 const color2 = Color.fromARGB(255, 253, 174, 97);
-const color3 = Color.fromARGB(255, 232, 202, 118);
-const color4 = Color.fromARGB(255, 198, 222, 75);
-const color5 = Color.fromARGB(255, 128, 194, 119);
-const color6 = Color.fromARGB(255, 102, 194, 165);
-const color7 = Color.fromARGB(255, 50, 136, 189);
+const color3 = Color.fromARGB(255, 198, 222, 75);
+const color4 = Color.fromARGB(255, 128, 194, 119);
+const color5 = Color.fromARGB(255, 102, 194, 165);
+const color6 = Color.fromARGB(255, 50, 136, 189);
+const color7 = Color.fromARGB(255, 169, 130, 220);
 
 // Define a custom TextTheme with Nunito font
 const TextTheme nunitoTextTheme = TextTheme(
@@ -81,7 +86,8 @@ List<Unit> derivedUnits = [
   Unit('Cubic Meter', 'm³', 'Volume', Hex(second: 0, meter: 3, kilogram: 0, ampere: 0, kelvin: 0, mole: 0, candela: 0)),
   Unit('Meter per Second', 'm\n―\ns', 'Velocity', Hex(second: -1, meter: 1, kilogram: 0, ampere: 0, kelvin: 0, mole: 0, candela: 0)),
   Unit('Meter per Second Squared', 'm\n―\ns²', 'Acceleration', Hex(second: -2, meter: 1, kilogram: 0, ampere: 0, kelvin: 0, mole: 0, candela: 0)),
-  Unit('Reciprocal Meter', 'm⁻¹', 'Wavenumber', Hex(second: 0, meter: -1, kilogram: 0, ampere: 0, kelvin: 0, mole: 0, candela: 0)),
+  //the superscript negative sign does not work for some reason
+  //Unit('Reciprocal Meter', 'm⁻¹', 'Wavenumber', Hex(second: 0, meter: -1, kilogram: 0, ampere: 0, kelvin: 0, mole: 0, candela: 0)),
   Unit('Kilogram per Cubic Meter', 'kg\n―\nm³', 'Density', Hex(second: 0, meter: -3, kilogram: 1, ampere: 0, kelvin: 0, mole: 0, candela: 0)),
   Unit('Kilogram per Square Meter', 'kg\n―\nm²', 'Surface Density', Hex(second: 0, meter: -2, kilogram: 1, ampere: 0, kelvin: 0, mole: 0, candela: 0)),
   Unit('Cubic Meter per Kilogram', 'm³\n―\nkg', 'Specific Volume', Hex(second: 0, meter: 3, kilogram: -1, ampere: 0, kelvin: 0, mole: 0, candela: 0)),
@@ -115,3 +121,92 @@ List<Unit> derivedUnits = [
   Unit('Katal per Cubic Meter', 'kat\n―\nm³', 'Catalytic Activity Concentration',
       Hex(second: -1, meter: -3, kilogram: 0, ampere: 0, kelvin: 0, mole: 1, candela: 0)),
 ];
+
+class NiceButton extends StatefulWidget {
+  final Color color;
+  final Color inactiveColor;
+  final double borderRadius;
+  final double height;
+  final Widget child;
+  final VoidCallback onPressed;
+  final bool active;
+  const NiceButton({
+    super.key,
+    this.color = mediumTeal,
+    this.inactiveColor = paleTeal,
+    this.borderRadius = 60,
+    this.height = 6,
+    this.active = true,
+    required this.child,
+    required this.onPressed,
+  });
+
+  @override
+  State<NiceButton> createState() => _NiceButtonState();
+}
+
+//https://stackoverflow.com/a/67989242
+extension ColorBrightness on Color {
+  Color darken([double amount = .1]) {
+    assert(amount >= 0 && amount <= 1);
+
+    final hsl = HSLColor.fromColor(this);
+    final hslDark = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
+
+    return hslDark.toColor();
+  }
+
+  Color lighten([double amount = .1]) {
+    assert(amount >= 0 && amount <= 1);
+
+    final hsl = HSLColor.fromColor(this);
+    final hslLight = hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
+
+    return hslLight.toColor();
+  }
+}
+
+class _NiceButtonState extends State<NiceButton> {
+  double _paddingTop = 0;
+  late double _paddingBottom = widget.height;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTapDown: (_) => setState(() {
+        _paddingTop = widget.height;
+        _paddingBottom = 0;
+      }),
+      onTapUp: (_) => setState(() {
+        _paddingTop = 0;
+        _paddingBottom = widget.height;
+
+        if (widget.active) {
+          widget.onPressed();
+        }
+      }),
+      child: AnimatedContainer(
+        padding: EdgeInsets.only(top: _paddingTop),
+        duration: const Duration(milliseconds: 100),
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(0, 0, 0, 0), //transparent
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: AnimatedContainer(
+          padding: EdgeInsets.only(bottom: _paddingBottom),
+          duration: const Duration(milliseconds: 100),
+          decoration: BoxDecoration(
+            color: widget.active ? widget.color.darken() : widget.inactiveColor.darken(),
+            borderRadius: BorderRadius.circular(widget.borderRadius),
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(widget.borderRadius),
+              color: widget.active ? widget.color : widget.inactiveColor,
+            ),
+            child: widget.child,
+          ),
+        ),
+      ),
+    );
+  }
+}
