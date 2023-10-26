@@ -119,7 +119,7 @@ class _HexGridState extends State<HexGrid> {
           padding: const EdgeInsets.all(8.0),
           child: Text(
             label,
-            style: TextStyle(fontSize: 10),
+            style: const TextStyle(fontSize: 10),
           ),
         ),
       ),
@@ -139,7 +139,7 @@ class _HexGridState extends State<HexGrid> {
         child: HexagonWidget.pointy(
           height: radius * 2,
           color: index == selectedIndex ? (polarity == 1 ? Colors.red : Colors.green) : const Color.fromARGB(255, 191, 211, 206),
-          elevation: 4,
+          elevation: 0,
           child: Text(label),
         ),
       ),

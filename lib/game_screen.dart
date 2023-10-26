@@ -43,7 +43,7 @@ class _HexBoardDisplayState extends State<HexBoardDisplay> {
           child: HexagonWidget.pointy(
             height: widget.radius,
             color: const Color.fromARGB(255, 54, 244, 54),
-            elevation: 8,
+            elevation: 0,
             child: const Text('PLAY'),
           ),
         ),

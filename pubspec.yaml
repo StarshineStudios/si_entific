@@ -30,7 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -115,6 +115,23 @@ flutter:
         - asset: fonts/Nunito/Nunito-Regular.ttf
         - asset: fonts/Nunito/Nunito-SemiBold.ttf
         - asset: fonts/Nunito/Nunito-SemiBoldItalic.ttf
+    - family: JosefinSans
+      fonts:
+        - asset: fonts/JosefinSans/JosefinSans-Bold.ttf
+        - asset: fonts/JosefinSans/JosefinSans-BoldItalic.ttf
+        - asset: fonts/JosefinSans/JosefinSans-ExtraLight.ttf
+        - asset: fonts/JosefinSans/JosefinSans-ExtraLightItalic.ttf
+        - asset: fonts/JosefinSans/JosefinSans-Italic.ttf
+        - asset: fonts/JosefinSans/JosefinSans-Light.ttf
+        - asset: fonts/JosefinSans/JosefinSans-LightItalic.ttf
+        - asset: fonts/JosefinSans/JosefinSans-Medium.ttf
+        - asset: fonts/JosefinSans/JosefinSans-MediumItalic.ttf
+        - asset: fonts/JosefinSans/JosefinSans-Regular.ttf
+        - asset: fonts/JosefinSans/JosefinSans-SemiBold.ttf
+        - asset: fonts/JosefinSans/JosefinSans-SemiBoldItalic.ttf
+        - asset: fonts/JosefinSans/JosefinSans-Thin.ttf
+        - asset: fonts/JosefinSans/JosefinSans-ThinItalic.ttf
+
 
 
   #

@@ -5,6 +5,7 @@ import 'unit.dart';
 const mediumTeal = Color.fromARGB(255, 33, 139, 130);
 const lightTeal = Color.fromARGB(255, 152, 212, 187);
 const darkTeal = Color.fromARGB(255, 7, 71, 65);
+const white = Color.fromARGB(255, 255, 255, 255);
 
 // Define a custom TextTheme with Nunito font
 const TextTheme nunitoTextTheme = TextTheme(
@@ -21,6 +22,22 @@ const TextTheme nunitoTextTheme = TextTheme(
   labelLarge: TextStyle(fontFamily: 'Nunito', fontSize: 14.0, fontWeight: FontWeight.w700),
   bodySmall: TextStyle(fontFamily: 'Nunito', fontSize: 12.0, fontWeight: FontWeight.w400),
   labelSmall: TextStyle(fontFamily: 'Nunito', fontSize: 10.0, fontWeight: FontWeight.w400),
+);
+
+const TextTheme josefinSansTextTheme = TextTheme(
+  displayLarge: TextStyle(fontFamily: 'JosefinSans', fontSize: 96.0, fontWeight: FontWeight.w300),
+  displayMedium: TextStyle(fontFamily: 'JosefinSans', fontSize: 60.0, fontWeight: FontWeight.w300),
+  displaySmall: TextStyle(fontFamily: 'JosefinSans', fontSize: 48.0, fontWeight: FontWeight.w400),
+  headlineMedium: TextStyle(fontFamily: 'JosefinSans', fontSize: 34.0, fontWeight: FontWeight.w400),
+  headlineSmall: TextStyle(fontFamily: 'JosefinSans', fontSize: 24.0, fontWeight: FontWeight.w400),
+  titleLarge: TextStyle(fontFamily: 'JosefinSans', fontSize: 20.0, fontWeight: FontWeight.w500),
+  titleMedium: TextStyle(fontFamily: 'JosefinSans', fontSize: 16.0, fontWeight: FontWeight.w400),
+  titleSmall: TextStyle(fontFamily: 'JosefinSans', fontSize: 14.0, fontWeight: FontWeight.w500),
+  bodyLarge: TextStyle(fontFamily: 'JosefinSans', fontSize: 16.0, fontWeight: FontWeight.w400),
+  bodyMedium: TextStyle(fontFamily: 'JosefinSans', fontSize: 14.0, fontWeight: FontWeight.w400),
+  labelLarge: TextStyle(fontFamily: 'JosefinSans', fontSize: 14.0, fontWeight: FontWeight.w700),
+  bodySmall: TextStyle(fontFamily: 'JosefinSans', fontSize: 12.0, fontWeight: FontWeight.w400),
+  labelSmall: TextStyle(fontFamily: 'JosefinSans', fontSize: 10.0, fontWeight: FontWeight.w400),
 );
 
 List<Unit> baseUnits = [
