@@ -94,12 +94,14 @@ class _HexGridState extends State<HexGrid> {
         if (polarity == 1) {
           if (board.multiplyHexes(selectedIndex, newIndex)) {
             board.addHex();
+
             selectedIndex = -1;
             polarity = 0;
           }
         } else if (polarity == -1) {
           if (board.divideHexes(selectedIndex, newIndex)) {
             board.addHex();
+
             selectedIndex = -1;
             polarity = 0;
           }
@@ -147,6 +149,8 @@ class _HexGridState extends State<HexGrid> {
 
   @override
   Widget build(BuildContext context) {
+    print(board.hexes);
+
     return ValueListenableBuilder(
       valueListenable: Hive.box('generalBox').listenable(),
       builder: (context, box, widget) {
@@ -178,13 +182,19 @@ class _HexGridState extends State<HexGrid> {
               child: ListView(
                 //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Column(
-                    children: board.orders.asMap().entries.map((entry) {
-                      int index = entry.key;
-                      Order order = entry.value;
-                      return _buildOrder(order.toString(), index);
-                    }).toList(),
-                  ),
+                  // Column(
+                  //   children: board.orders.asMap().entries.map((entry) {
+                  //     int index = entry.key;
+                  //     Order order = entry.value;
+                  //     return _buildOrder(order.toString(), index);
+                  //   }).toList(),
+                  // ),
+
+                  _buildOrder(board.orders[0].toString(), 0),
+                  _buildOrder(board.orders[1].toString(), 1),
+
+                  _buildOrder(board.orders[2].toString(), 2),
+
                   // Column(
                   //   children: [
                   //     Text(
@@ -242,7 +252,7 @@ class _HexGridState extends State<HexGrid> {
                     ),
                   ),
 
-                  Padding(
+                  Container(
                     padding: const EdgeInsets.all(8.0),
                     child: Center(
                       child: Container(
@@ -254,7 +264,7 @@ class _HexGridState extends State<HexGrid> {
                                   ? Colors.red
                                   : Colors.green,
                         ),
-                        child: Padding(
+                        child: Container(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             selectedIndex == -1
@@ -293,7 +303,7 @@ class _HexGridState extends State<HexGrid> {
           manageOrder(orderIndex);
         });
       },
-      child: Padding(
+      child: Container(
         padding: const EdgeInsets.all(8.0),
         child: Container(
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(7), color: lightTeal),

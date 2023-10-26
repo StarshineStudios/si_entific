@@ -20,8 +20,8 @@ class Board {
   //List<Order> orders = [Order(), Order(), Order()];
   late List<Order> orders = [
     Order(hex: Hex(meter: 1), points: 1, quantityName: 'length', unitName: 'meter'),
-    Order(hex: Hex(meter: 1), points: 1, quantityName: 'length', unitName: 'meter'),
-    Order(hex: Hex(meter: 1), points: 1, quantityName: 'length', unitName: 'meter'),
+    Order(hex: Hex(second: 1), points: 1, quantityName: 'time', unitName: 'second'),
+    Order(hex: Hex(kilogram: 1), points: 1, quantityName: 'mass', unitName: 'kilogram'),
   ];
   int score = 0;
   int moveCount = 0;
@@ -69,15 +69,14 @@ class Board {
     List<Unit> orderUnits = [];
 
     //for each order, look at it's base components
-    for (Order order in orders) {
+    for (int k = 0; k < 3; k++) {
+      Order order = orders[k];
       List<int> listOfAmounts = order.hex.getAsList();
 
-      int index = 0;
-      for (int amount in listOfAmounts) {
-        for (int i = 0; i < amount.abs(); i++) {
-          orderUnits.add(baseUnits[index]);
+      for (int i = 0; i < 7; i++) {
+        for (int j = 0; j < listOfAmounts[i].abs(); j++) {
+          orderUnits.add(baseUnits[j]);
         }
-        index++;
       }
     }
     final Unit randomOrderUnit = randomChoice(orderUnits);
@@ -86,7 +85,7 @@ class Board {
     //choose whether to use a random one or one for an order.
     Random random = Random();
     int randomNumber = random.nextInt(100); // Generates a random number between 0 and 99
-    bool isUsingOrderUnit = randomNumber < 66; // Returns true 66% of the time
+    bool isUsingOrderUnit = randomNumber < 66; // Returns true ~66% of the time
 
     final Unit newUnit = isUsingOrderUnit ? randomOrderUnit : randomBaseUnit;
 

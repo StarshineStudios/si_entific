@@ -46,9 +46,9 @@ class Hex {
   }
 
   void clear() {
+    second = 0;
     meter = 0;
     kilogram = 0;
-    second = 0;
     ampere = 0;
     kelvin = 0;
     mole = 0;
@@ -56,11 +56,15 @@ class Hex {
   }
 
   bool isClear() {
-    return meter == 0 && kilogram == 0 && second == 0 && ampere == 0 && kelvin == 0 && mole == 0 && candela == 0;
+    return second == 0 && meter == 0 && kilogram == 0 && ampere == 0 && kelvin == 0 && mole == 0 && candela == 0;
   }
 
   int difficulty() {
     return (second.abs() + meter.abs() + kilogram.abs() + ampere.abs() + kelvin.abs() + mole.abs() + candela.abs());
+  }
+
+  void addSecond() {
+    second += 1;
   }
 
   void addMeter() {
@@ -69,10 +73,6 @@ class Hex {
 
   void addKilogram() {
     kilogram += 1;
-  }
-
-  void addSecond() {
-    second += 1;
   }
 
   void addAmpere() {
@@ -91,16 +91,17 @@ class Hex {
     candela += 1;
   }
 
+  //remove
+  void removeSecond() {
+    second -= 1;
+  }
+
   void removeMeter() {
     meter -= 1;
   }
 
   void removeKilogram() {
     kilogram -= 1;
-  }
-
-  void removeSecond() {
-    second -= 1;
   }
 
   void removeAmpere() {
@@ -120,9 +121,9 @@ class Hex {
   }
 
   void multiply(Hex other) {
+    second += other.second;
     meter += other.meter;
     kilogram += other.kilogram;
-    second += other.second;
     ampere += other.ampere;
     kelvin += other.kelvin;
     mole += other.mole;
@@ -130,9 +131,9 @@ class Hex {
   }
 
   void divide(Hex other) {
+    second = other.second - second;
     meter = other.meter - meter;
     kilogram = other.kilogram - kilogram;
-    second = other.second - second;
     ampere = other.ampere - ampere;
     kelvin = other.kelvin - kelvin;
     mole = other.mole - mole;
@@ -143,9 +144,9 @@ class Hex {
   @override
   bool operator ==(Object other) {
     if (other is Hex) {
-      return meter == other.meter &&
+      return second == other.second &&
+          meter == other.meter &&
           kilogram == other.kilogram &&
-          second == other.second &&
           ampere == other.ampere &&
           kelvin == other.kelvin &&
           mole == other.mole &&
@@ -320,9 +321,9 @@ class Hex {
     ];
 
     for (var unitAndSymbol in [
+      [second, "s"],
       [meter, "m"],
       [kilogram, "kg"],
-      [second, "s"],
       [ampere, "A"],
       [kelvin, "K"],
       [mole, "mol"],
@@ -344,9 +345,9 @@ class Hex {
         if (unit < -1) {
           int abs = unit.abs();
           if (abs <= 9) {
-            denominator += "$symbol${superscripts[unit]}·";
+            denominator += "$symbol${superscripts[abs]}·";
           } else {
-            denominator += "($symbol^${-1 * unit})·";
+            denominator += "($symbol^$abs)·";
           }
         } else {
           denominator += "$symbol·";
@@ -381,6 +382,7 @@ class Hex {
     for (int i = 0; i < text.length; i++) {
       String char = text[i];
       if (char == '·' ||
+          char == '^' ||
           char == '⁰' ||
           char == '¹' ||
           char == '²' ||
@@ -400,7 +402,6 @@ class Hex {
     return length;
   }
 
-  @override
   String toBaseUnits() {
     //check if it matches a derived unit
     // for (Unit unit in derivedUnits) {
@@ -426,9 +427,9 @@ class Hex {
     ];
 
     for (var unitAndSymbol in [
+      [second, "s"],
       [meter, "m"],
       [kilogram, "kg"],
-      [second, "s"],
       [ampere, "A"],
       [kelvin, "K"],
       [mole, "mol"],
@@ -452,7 +453,7 @@ class Hex {
           if (abs <= 9) {
             denominator += "$symbol${superscripts[abs]}·";
           } else {
-            denominator += "($symbol^${-1 * unit})·";
+            denominator += "($symbol^$abs)·";
           }
         } else {
           denominator += "$symbol·";
