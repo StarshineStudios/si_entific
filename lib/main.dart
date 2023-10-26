@@ -74,7 +74,16 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [mediumTeal, mediumTealTransp, Transp, Transp, mediumTealTransp, mediumTeal],
+                    colors: [
+                      mediumTeal,
+                      mediumTeal,
+                      mediumTealTransp,
+                      Transp,
+                      Transp,
+                      Transp,
+                      mediumTealTransp,
+                      mediumTeal,
+                    ],
                     //stops: [0.25, 0.4, 0.6, 0.75],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,

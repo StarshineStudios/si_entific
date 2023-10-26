@@ -3,6 +3,7 @@ import 'hex_code.dart';
 import 'order.dart';
 import 'constants.dart';
 import 'unit.dart';
+import 'package:dart_random_choice/dart_random_choice.dart';
 
 class Board {
   static final List<List<int>> compatibility = [
@@ -63,7 +64,33 @@ class Board {
     }
 
     final int spawnIndex = availableIndexes[Random().nextInt(availableIndexes.length)];
-    final Unit newUnit = baseUnits[Random().nextInt(baseUnits.length)];
+
+    //now check the units that we have.
+    List<Unit> orderUnits = [];
+
+    //for each order, look at it's base components
+    for (Order order in orders) {
+      List<int> listOfAmounts = order.hex.getAsList();
+
+      int index = 0;
+      for (int amount in listOfAmounts) {
+        for (int i = 0; i < amount.abs(); i++) {
+          orderUnits.add(baseUnits[index]);
+        }
+        index++;
+      }
+    }
+    final Unit randomOrderUnit = randomChoice(orderUnits);
+    final Unit randomBaseUnit = randomChoice(baseUnits, [.18, .18, .16, .14, .11, .11, .12]);
+
+    //choose whether to use a random one or one for an order.
+    Random random = Random();
+    int randomNumber = random.nextInt(100); // Generates a random number between 0 and 99
+    bool isUsingOrderUnit = randomNumber < 66; // Returns true 66% of the time
+
+    final Unit newUnit = isUsingOrderUnit ? randomOrderUnit : randomBaseUnit;
+
+    // final Unit newUnit = baseUnits[Random().nextInt(baseUnits.length)];
 
     //print(newUnit.hex.toString());
 

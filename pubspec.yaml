@@ -39,6 +39,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   hexagon: ^0.2.0
+  dart_random_choice: ^0.2.0
   # google_fonts: ^2.1.0 
 
 
