@@ -57,7 +57,7 @@ class Board {
     }
 
     if (!available) {
-      print('game over');
+      //print('game over');
       return;
       // You may want to handle the game over logic here.
     }
@@ -65,7 +65,7 @@ class Board {
     final int spawnIndex = availableIndexes[Random().nextInt(availableIndexes.length)];
     final Unit newUnit = baseUnits[Random().nextInt(baseUnits.length)];
 
-    print(newUnit.hex.toString());
+    //print(newUnit.hex.toString());
 
     hexes[spawnIndex] = Hex(
       second: newUnit.hex.second,

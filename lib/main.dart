@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:google_fonts/google_fonts.dart';
 import 'package:hexagon/hexagon.dart';
+import 'package:si_entific/asteroid.dart';
 import 'package:si_entific/constants.dart';
 import 'game_screen.dart';
 import 'rotator.dart';
@@ -63,21 +64,16 @@ class _MyHomePageState extends State<MyHomePage> {
           Stack(
             children: [
               //Asteroid 1
-              AnimatedPositioned(
-                duration: const Duration(seconds: 10),
-                child: LogoRotate(
-                  duration: const Duration(seconds: 7),
-                  clockwise: true,
-                  child: HexagonWidget.pointy(
-                    width: 200,
-                    color: const Color.fromARGB(255, 117, 219, 0),
-                    elevation: 0,
-                    child: const Text(
-                      'N',
-                      style: TextStyle(color: white, fontSize: 40),
-                    ),
-                  ),
-                ),
+              const Stack(
+                children: [
+                  SpinnyAsteroid(50.0, 2.0, color1, 's', 50.0, true, Duration(seconds: 5)), // Set the initial X-position and falling speed
+                  SpinnyAsteroid(100.0, 1.5, color2, 'm', 40.0, false, Duration(seconds: 7)),
+                  SpinnyAsteroid(150.0, 2.5, color3, 'kg', 60.0, true, Duration(seconds: 4)),
+                  SpinnyAsteroid(200.0, 1.0, color4, 'A', 45.0, false, Duration(seconds: 8)),
+                  SpinnyAsteroid(250.0, 2.0, color5, 'K', 55.0, true, Duration(seconds: 3)),
+                  SpinnyAsteroid(150.0, 2.5, color3, 'mol', 60.0, false, Duration(seconds: 5)),
+                  SpinnyAsteroid(200.0, 1.0, color4, 'cd', 45.0, true, Duration(seconds: 4)),
+                ],
               ),
 
               //HEX AND TITLE

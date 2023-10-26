@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hexagon/hexagon.dart';
 
-
 class RotatingPulser extends StatefulWidget {
   final double minSize;
   final double maxSize;
   final Duration duration;
   final Color color;
 
-  const RotatingPulser({super.key, 
+  const RotatingPulser({
+    super.key,
     required this.minSize,
     required this.maxSize,
     required this.duration,
@@ -16,7 +16,7 @@ class RotatingPulser extends StatefulWidget {
   });
 
   @override
-  _RotatingPulserState createState() => _RotatingPulserState();
+  State<RotatingPulser> createState() => _RotatingPulserState();
 }
 
 class _RotatingPulserState extends State<RotatingPulser> with SingleTickerProviderStateMixin {

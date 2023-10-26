@@ -38,7 +38,7 @@ class _HexGridState extends State<HexGrid> {
           selectedIndex = -1;
           //if it is not selected this is literally impossible
         } else {
-          print('something terrible happened');
+          //print('something terrible happened');
         }
         //IF WE ARE TAPPING A DIFFERENT HEX
       } else {
@@ -55,12 +55,12 @@ class _HexGridState extends State<HexGrid> {
             polarity = 0;
           }
         } else {
-          print('something went terribly wrong');
+          //print('something went terribly wrong');
         }
       }
     }
 
-    print(selectedIndex);
+    //print(selectedIndex);
   }
 
   void manageOrder(int orderIndex) {

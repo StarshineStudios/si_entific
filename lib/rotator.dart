@@ -65,9 +65,6 @@
 // }
 
 import 'package:flutter/material.dart';
-import 'package:hexagon/hexagon.dart';
-
-import 'constants.dart';
 
 void main() {
   runApp(const MyApp());

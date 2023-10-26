@@ -7,6 +7,14 @@ const lightTeal = Color.fromARGB(255, 152, 212, 187);
 const darkTeal = Color.fromARGB(255, 7, 71, 65);
 const white = Color.fromARGB(255, 255, 255, 255);
 
+const color1 = Color.fromARGB(255, 244, 109, 67);
+const color2 = Color.fromARGB(255, 253, 174, 97);
+const color3 = Color.fromARGB(255, 232, 202, 118);
+const color4 = Color.fromARGB(255, 198, 222, 75);
+const color5 = Color.fromARGB(255, 128, 194, 119);
+const color6 = Color.fromARGB(255, 102, 194, 165);
+const color7 = Color.fromARGB(255, 50, 136, 189);
+
 // Define a custom TextTheme with Nunito font
 const TextTheme nunitoTextTheme = TextTheme(
   displayLarge: TextStyle(fontFamily: 'Nunito', fontSize: 96.0, fontWeight: FontWeight.w300),

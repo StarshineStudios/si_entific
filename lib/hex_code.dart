@@ -137,6 +137,7 @@ class Hex {
     candela = other.candela - candela;
   }
 
+  // ignore: hash_and_equals
   @override
   bool operator ==(Object other) {
     if (other is Hex) {
