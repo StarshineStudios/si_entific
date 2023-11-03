@@ -2,8 +2,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:hexagon/hexagon.dart';
-import 'package:si_entific/constants.dart';
 import 'hexagon_grid_widget.dart';
 
 class GameScreen extends StatelessWidget {

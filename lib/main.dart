@@ -78,9 +78,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       mediumTeal,
                       mediumTeal,
                       mediumTealTransp,
-                      Transp,
-                      Transp,
-                      Transp,
+                      transp,
+                      transp,
+                      transp,
                       mediumTealTransp,
                       mediumTeal,
                     ],
@@ -143,7 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                   ),
-                  Positioned(
+                  const Positioned(
                     top: 100,
                     child: Center(
                       child: Text(
@@ -157,7 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Center(
                       child: Text(
                         'HIGHSCORE: $highscore',
-                        style: TextStyle(color: white, fontSize: 30),
+                        style: const TextStyle(color: white, fontSize: 30),
                       ),
                     ),
                   ),
@@ -172,7 +172,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         );
                       },
-                      child: Icon(
+                      child: const Icon(
                         Icons.settings,
                         size: 60,
                         color: white,
@@ -190,7 +190,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         );
                       },
-                      child: Icon(
+                      child: const Icon(
                         Icons.info,
                         size: 60,
                         color: white,

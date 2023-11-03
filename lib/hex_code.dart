@@ -212,9 +212,9 @@ class Hex {
       Colors.green,
       Colors.blue,
     ];
-
-    Color avgColor = averageColor(colors);
-    print('Average Color: $avgColor');
+    //test of average color
+    //Color avgColor = averageColor(colors);
+    //print('Average Color: $avgColor');
   }
   // double fontSize() {
   //   //check if it matches a derived unit

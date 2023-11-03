@@ -4,7 +4,7 @@ import 'unit.dart';
 
 const mediumTeal = Color.fromARGB(255, 33, 139, 130);
 const mediumTealTransp = Color.fromARGB(125, 33, 139, 130);
-const Transp = Color.fromARGB(0, 33, 139, 130);
+const transp = Color.fromARGB(0, 33, 139, 130);
 
 const paleTeal = Color.fromARGB(255, 181, 211, 198);
 

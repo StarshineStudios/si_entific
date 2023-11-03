@@ -5,7 +5,6 @@ import 'package:hexagon/hexagon.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:si_entific/constants.dart';
 import 'board.dart';
-import 'order.dart';
 
 class HexGrid extends StatefulWidget {
   const HexGrid({super.key});
@@ -149,7 +148,7 @@ class _HexGridState extends State<HexGrid> {
 
   @override
   Widget build(BuildContext context) {
-    print(board.hexes);
+    //print(board.hexes);
 
     return ValueListenableBuilder(
       valueListenable: Hive.box('generalBox').listenable(),
@@ -210,7 +209,7 @@ class _HexGridState extends State<HexGrid> {
                   Center(
                     child: Container(
                       constraints: BoxConstraints.expand(width: 0.86602540378 * radius * 6, height: radius * 6), // Set yourWidth and yourHeight accordingly
-                      color: Transp,
+                      color: transp,
                       child: Stack(
                         children: <Widget>[
                           GestureDetector(
@@ -221,7 +220,7 @@ class _HexGridState extends State<HexGrid> {
                               });
                             },
                             child: Container(
-                              color: Transp,
+                              color: transp,
                             ),
                           ),
 
@@ -259,7 +258,7 @@ class _HexGridState extends State<HexGrid> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                           color: selectedIndex == -1
-                              ? Transp
+                              ? transp
                               : polarity == 1
                                   ? Colors.red
                                   : Colors.green,
@@ -348,7 +347,7 @@ class _HexGridState extends State<HexGrid> {
         },
         child: HexagonWidget.pointy(
           height: radius * 2,
-          color: Transp,
+          color: transp,
           elevation: 0,
           child: HexagonWidget.pointy(
             height: radius * 2 - 10,
@@ -365,7 +364,7 @@ class _HexGridState extends State<HexGrid> {
                   child: Text(
                     label,
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: white, fontSize: 70, height: 0),
+                    style: const TextStyle(color: white, fontSize: 70, height: 0),
                   ),
                 ),
               ),
@@ -403,7 +402,7 @@ class _HexGridState extends State<HexGrid> {
                 child: Text(
                   label,
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: white, fontSize: 70, height: 0),
+                  style: const TextStyle(color: white, fontSize: 70, height: 0),
                 ),
               ),
             ),
