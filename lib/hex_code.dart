@@ -333,7 +333,8 @@ class Hex {
       final symbol = unitAndSymbol[1] as String;
       if (unit > 0) {
         if (unit > 1) {
-          if (unit <= 9) {
+          //4 because the symbol for 5 does not work
+          if (unit <= 4) {
             numerator += "$symbol${superscripts[unit]}·";
           } else {
             numerator += "($symbol^$unit)·";
@@ -344,7 +345,9 @@ class Hex {
       } else if (unit < 0) {
         if (unit < -1) {
           int abs = unit.abs();
-          if (abs <= 9) {
+          //4 because the symbol for 5 does not work
+
+          if (abs <= 4) {
             denominator += "$symbol${superscripts[abs]}·";
           } else {
             denominator += "($symbol^$abs)·";
@@ -400,6 +403,32 @@ class Hex {
     }
 
     return length;
+  }
+
+  List<Hex> toBaseHexes() {
+    List<Hex> result = [];
+    for (int i = 0; i < second.abs(); i++) {
+      result.add(Hex(second: 1));
+    }
+    for (int i = 0; i < meter.abs(); i++) {
+      result.add(Hex(meter: 1));
+    }
+    for (int i = 0; i < kilogram.abs(); i++) {
+      result.add(Hex(kilogram: 1));
+    }
+    for (int i = 0; i < ampere.abs(); i++) {
+      result.add(Hex(ampere: 1));
+    }
+    for (int i = 0; i < kelvin.abs(); i++) {
+      result.add(Hex(kelvin: 1));
+    }
+    for (int i = 0; i < mole.abs(); i++) {
+      result.add(Hex(mole: 1));
+    }
+    for (int i = 0; i < candela.abs(); i++) {
+      result.add(Hex(candela: 1));
+    }
+    return result;
   }
 
   String toBaseUnits() {
@@ -482,8 +511,6 @@ class Hex {
     }
   }
 }
-
-
 
 // final List<List> derivedUnits = [
 //   ['Hertz', 'Hz', 'Frequency', Hex(second: -1, meter: 0, kilogram: 0, ampere: 0, kelvin: 0, mole: 0, candela: 0)],

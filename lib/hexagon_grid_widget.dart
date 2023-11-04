@@ -162,7 +162,7 @@ class _HexGridState extends State<HexGrid> {
           box.put('highscore', board.score);
         }
 
-        String topText = hasBeatenHighScore ? 'New Highscore!: $highscore' : 'Score: ${board.score} Highscore: $highscore';
+        String topText = hasBeatenHighScore ? 'New Highscore! $highscore' : 'Score: ${board.score} Highscore: $highscore';
 
         return Scaffold(
           backgroundColor: mediumTeal,
@@ -171,6 +171,7 @@ class _HexGridState extends State<HexGrid> {
               topText,
               textAlign: TextAlign.center,
               textScaleFactor: 1.5,
+              style: const TextStyle(fontSize: 16),
             ),
             backgroundColor: mediumTeal,
             foregroundColor: white,
@@ -377,9 +378,9 @@ class _HexGridState extends State<HexGrid> {
 
   //the display hex at bottom
   Widget _buildBigHexagon(double offsetY, double offsetX, String label, int index, Color hexColor) {
-    return Positioned(
-      top: offsetY + radius * 2,
-      left: offsetX + radius * sqrt(3),
+    return Container(
+      // top: offsetY + radius * 2,
+      // left: offsetX + radius * sqrt(3),
       child: GestureDetector(
         onTap: () {
           setState(() {

@@ -137,7 +137,7 @@ class _InfoScreenState extends State<InfoScreen> {
                   ),
                   Image(image: AssetImage('assets/info2.png')),
                   Text(
-                    'Every time you make a move, a new SI base unit will spawn randomly. Use these units to make the orders above. When you are ready to submit a hex, tap on it, then tap on the order. It does not matter if you are in multiplication mode or division mode.',
+                    'Every time you make a move, a new SI base unit will spawn randomly. Use these units to make the orders above. When you are ready to submit a hex, tap on it, then tap on the order. It does not matter if you are in multiplication mode or division mode. Scroll down to see a base unit breakdown.',
                     style: TextStyle(color: white, fontSize: 20),
                   ),
                   Image(image: AssetImage('assets/info3.png')),
@@ -153,7 +153,7 @@ class _InfoScreenState extends State<InfoScreen> {
                     style: TextStyle(color: white, fontSize: 40),
                   ),
                   Text(
-                    'Built by Saebyul Hong \nBased on HexSIgon by Saebyul Hong and Austin McGregor',
+                    'Built by Saebyul Hong \nBased on HexSIgon by Saebyul Hong and Austin McGregor, a HackGT X submission.',
                     style: TextStyle(color: white, fontSize: 20),
                   ),
                 ],

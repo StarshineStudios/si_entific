@@ -23,6 +23,8 @@ class Board {
     Order(hex: Hex(second: 1), points: 1, quantityName: 'time', unitName: 'second'),
     Order(hex: Hex(kilogram: 1), points: 1, quantityName: 'mass', unitName: 'kilogram'),
   ];
+
+  late List<Hex> orderHexes = [];
   int score = 0;
   int moveCount = 0;
   int orderCount = 0;
@@ -58,7 +60,7 @@ class Board {
     }
 
     if (!available) {
-      //print('game over');
+      //print('something went terriibly wrong.');
       return;
       // You may want to handle the game over logic here.
     }
@@ -66,42 +68,55 @@ class Board {
     final int spawnIndex = availableIndexes[Random().nextInt(availableIndexes.length)];
 
     //now check the units that we have.
-    List<Unit> orderUnits = [];
+
+    //if empty, we should add it to
+    if (orderHexes.isEmpty) {
+      orderHexes.addAll(orders[0].hex.toBaseHexes());
+      orderHexes.addAll(orders[1].hex.toBaseHexes());
+      orderHexes.addAll(orders[2].hex.toBaseHexes());
+    }
+    print(orderHexes);
 
     //for each order, look at it's base components
-    for (int k = 0; k < 3; k++) {
-      Order order = orders[k];
-      List<int> listOfAmounts = order.hex.getAsList();
+    // for (int k = 0; k < 3; k++) {
+    //   Order order = orders[k];
+    //   List<int> listOfAmounts = order.hex.getAsList();
 
-      for (int i = 0; i < 7; i++) {
-        for (int j = 0; j < listOfAmounts[i].abs(); j++) {
-          orderUnits.add(baseUnits[j]);
-        }
-      }
-    }
-    final Unit randomOrderUnit = randomChoice(orderUnits);
-    final Unit randomBaseUnit = randomChoice(baseUnits, [.18, .18, .16, .14, .11, .11, .12]);
+    //   for (int i = 0; i < 7; i++) {
+    //     for (int j = 0; j < listOfAmounts[i].abs(); j++) {
+    //       orderUnits.add(baseUnits[j]);
+    //     }
+    //   }
+    // }
+
+    Random random = Random();
+    int randomOrderHexIndex = random.nextInt(orderHexes.length); // Generates a random number between 0 and 99
+
+    final Hex randomOrderHex = orderHexes.removeAt(randomOrderHexIndex);
+
+    final Hex randomBaseHex = randomChoice(baseHexes, [.18, .18, .16, .14, .11, .11, .12]);
 
     //choose whether to use a random one or one for an order.
-    Random random = Random();
     int randomNumber = random.nextInt(100); // Generates a random number between 0 and 99
-    bool isUsingOrderUnit = randomNumber < 66; // Returns true ~66% of the time
+    bool isUsingOrderUnit = randomNumber < 90; // Returns true ~66% of the time
 
-    final Unit newUnit = isUsingOrderUnit ? randomOrderUnit : randomBaseUnit;
+    final Hex newHex = isUsingOrderUnit ? randomOrderHex : randomBaseHex;
 
     // final Unit newUnit = baseUnits[Random().nextInt(baseUnits.length)];
 
     //print(newUnit.hex.toString());
 
-    hexes[spawnIndex] = Hex(
-      second: newUnit.hex.second,
-      meter: newUnit.hex.meter,
-      kilogram: newUnit.hex.kilogram,
-      ampere: newUnit.hex.ampere,
-      kelvin: newUnit.hex.kelvin,
-      mole: newUnit.hex.mole,
-      candela: newUnit.hex.candela,
-    );
+    hexes[spawnIndex] = newHex;
+
+    // Hex(
+    //   second: newUnit.hex.second,
+    //   meter: newUnit.hex.meter,
+    //   kilogram: newUnit.hex.kilogram,
+    //   ampere: newUnit.hex.ampere,
+    //   kelvin: newUnit.hex.kelvin,
+    //   mole: newUnit.hex.mole,
+    //   candela: newUnit.hex.candela,
+    // );
   }
 
   @override

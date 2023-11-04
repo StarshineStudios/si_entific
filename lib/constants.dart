@@ -63,6 +63,16 @@ List<Unit> baseUnits = [
   Unit('candela', 'cd', 'time', Hex(second: 0, meter: 0, kilogram: 0, ampere: 0, kelvin: 0, mole: 0, candela: 1)),
 ];
 
+List<Hex> baseHexes = [
+  Hex(second: 1, meter: 0, kilogram: 0, ampere: 0, kelvin: 0, mole: 0, candela: 0),
+  Hex(second: 0, meter: 1, kilogram: 0, ampere: 0, kelvin: 0, mole: 0, candela: 0),
+  Hex(second: 0, meter: 0, kilogram: 1, ampere: 0, kelvin: 0, mole: 0, candela: 0),
+  Hex(second: 0, meter: 0, kilogram: 0, ampere: 1, kelvin: 0, mole: 0, candela: 0),
+  Hex(second: 0, meter: 0, kilogram: 0, ampere: 0, kelvin: 1, mole: 0, candela: 0),
+  Hex(second: 0, meter: 0, kilogram: 0, ampere: 0, kelvin: 0, mole: 1, candela: 0),
+  Hex(second: 0, meter: 0, kilogram: 0, ampere: 0, kelvin: 0, mole: 0, candela: 1),
+];
+
 List<Unit> derivedUnits = [
   Unit('Hertz', 'Hz', 'Frequency', Hex(second: -1, meter: 0, kilogram: 0, ampere: 0, kelvin: 0, mole: 0, candela: 0)),
   Unit('Newton', 'N', 'Force', Hex(second: -2, meter: 1, kilogram: 1, ampere: 0, kelvin: 0, mole: 0, candela: 0)),
