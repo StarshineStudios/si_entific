@@ -298,8 +298,10 @@ class Hex {
   @override
   String toString() {
     //check if it matches a derived unit
+
+    // return 'lol';
     for (Unit unit in derivedUnits) {
-      if (this == unit.hex) {
+      if (this.toBaseUnits() == unit.hex.toBaseUnits()) {
         return unit.symbol;
       }
     }

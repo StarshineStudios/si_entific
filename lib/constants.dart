@@ -123,12 +123,12 @@ List<Unit> derivedUnits = [
   Unit('Coulomb per Square Meter', 'C\n―\nm²', 'Surface Charge Density', Hex(second: 1, meter: -2, kilogram: 0, ampere: 1, kelvin: 0, mole: 0, candela: 0)),
   Unit('Farad per Meter', 'F\n―\nm', 'Permittivity', Hex(second: 4, meter: -3, kilogram: -1, ampere: 2, kelvin: 0, mole: 0, candela: 0)),
   Unit('Henry per Meter', 'H\n―\nm', 'Permeability', Hex(second: -2, meter: 1, kilogram: 1, ampere: -2, kelvin: 0, mole: 0, candela: 0)),
-  Unit('Joule per Mole', 'J\n―\nmol', 'Molar Energy', Hex(second: -2, meter: 2, kilogram: 1, ampere: 0, kelvin: 0, mole: -1, candela: 0)),
-  Unit('Joule per Mole-Kelvin', 'J\n―\n(mol·K)', 'Molar Entropy', Hex(second: -2, meter: 2, kilogram: 1, ampere: 0, kelvin: -1, mole: -1, candela: 0)),
-  Unit('Coulomb per Kilogram', 'C\n―\nkg', 'Exposure', Hex(second: 1, meter: 0, kilogram: -1, ampere: 1, kelvin: 0, mole: 0, candela: 0)),
+  Unit('Joule per Mole', 'J\n―――\nmol', 'Molar Energy', Hex(second: -2, meter: 2, kilogram: 1, ampere: 0, kelvin: 0, mole: -1, candela: 0)),
+  Unit('Joule per Mole-Kelvin', 'J\n――――\n(mol·K)', 'Molar Entropy', Hex(second: -2, meter: 2, kilogram: 1, ampere: 0, kelvin: -1, mole: -1, candela: 0)),
+  Unit('Coulomb per Kilogram', 'C\n――\nkg', 'Exposure', Hex(second: 1, meter: 0, kilogram: -1, ampere: 1, kelvin: 0, mole: 0, candela: 0)),
   Unit('Gray per Second', 'Gy\n―\ns', 'Absorbed Dose Rate', Hex(second: -3, meter: 2, kilogram: 0, ampere: 0, kelvin: 0, mole: 0, candela: 0)),
-  Unit('Watt per Steradian', 'W\n―\nsr', 'Radiant Intensity', Hex(second: -3, meter: 2, kilogram: 1, ampere: 0, kelvin: 0, mole: 0, candela: 0)),
-  Unit('Katal per Cubic Meter', 'kat\n―\nm³', 'Catalytic Activity Concentration',
+  Unit('Watt per Steradian', 'W\n――\nsr', 'Radiant Intensity', Hex(second: -3, meter: 2, kilogram: 1, ampere: 0, kelvin: 0, mole: 0, candela: 0)),
+  Unit('Katal per Cubic Meter', 'kat\n―――\nm³', 'Catalytic Activity Concentration',
       Hex(second: -1, meter: -3, kilogram: 0, ampere: 0, kelvin: 0, mole: 1, candela: 0)),
 ];
 
