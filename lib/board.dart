@@ -24,12 +24,11 @@ class Board {
     // Unit(hex: Hex(kilogram: 1), points: 1, quantityName: 'mass', unitName: 'kilogram'),
 
     Unit('meter', 'm', 'length', Hex(meter: 1)),
-
     Unit('second', 's', 'time', Hex(second: 1)),
     Unit('kilogram', 'kg', 'mass', Hex(kilogram: 1)),
   ];
 
-  late List<Order> ordersQueued = derivedUnits;
+  late List<Unit> ordersQueued = derivedUnits;
 
   late List<Hex> orderHexes = [];
   int score = 0;
@@ -40,10 +39,14 @@ class Board {
 
   void processOrder(int orderIndex, int hexIndex) {
     //JUST A TEMPORARY SOLUTION TO CONVERT TO STRINGS
-    if (hexes[hexIndex].toString() == orders[orderIndex].hex.toString()) {
-      score += orders[orderIndex].points;
+    if (hexes[hexIndex].toBaseUnits() == orders[orderIndex].hex.toBaseUnits()) {
+      score += orders[orderIndex].getPoints();
 
-      Unit newUnit = derivedUnits[Random().nextInt(derivedUnits.length)];
+      int getOrderIndex = Random().nextInt(ordersQueued.length);
+      print(ordersQueued);
+      Unit newUnit = ordersQueued.removeAt(getOrderIndex);
+
+      //derivedUnits[Random().nextInt(derivedUnits.length)];
       // orders[orderIndex].change(
       //   newUnit.hex,
       //   newUnit.hex.difficulty(),
