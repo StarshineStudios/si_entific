@@ -132,15 +132,20 @@ class _InfoScreenState extends State<InfoScreen> {
                   ),
                   Image(image: AssetImage('assets/info1.png')),
                   Text(
-                    'While a hex is selected, tap an ajacent hex to multiply or divide it.',
+                    'While a hex is selected, tap an adjacent hex to multiply or divide it (based on the mode the hex is in).',
                     style: TextStyle(color: white, fontSize: 20),
                   ),
                   Image(image: AssetImage('assets/info2.png')),
                   Text(
-                    'Every time you make a move, a new SI base unit will spawn randomly. Use these units to make the orders above. When you are ready to submit a hex, tap on it, then tap on the order. It does not matter if you are in multiplication mode or division mode. Scroll down to see a base unit breakdown.',
+                    'Every time you make a move, a new SI base unit will spawn randomly. Use these units to make the orders above. When you are ready to submit a hex, tap on it, then tap on the order. It does not matter if you are in multiplication mode or division mode.',
                     style: TextStyle(color: white, fontSize: 20),
                   ),
                   Image(image: AssetImage('assets/info3.png')),
+                  Text(
+                    'Scroll down to see a base unit breakdown. In this case, a Newton is  1 m⋅kg⋅s⁻²',
+                    style: TextStyle(color: white, fontSize: 20),
+                  ),
+                  Image(image: AssetImage('assets/info4.png')),
                   Text(
                     'Now, get ready to think SI-entifically!',
                     style: TextStyle(color: white, fontSize: 20),
