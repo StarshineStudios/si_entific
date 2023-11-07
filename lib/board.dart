@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'hex_code.dart';
-import 'order.dart';
+// import 'order.dart';
 import 'constants.dart';
 import 'unit.dart';
 import 'package:dart_random_choice/dart_random_choice.dart';
@@ -42,8 +42,11 @@ class Board {
     if (hexes[hexIndex].toBaseUnits() == orders[orderIndex].hex.toBaseUnits()) {
       score += orders[orderIndex].getPoints();
 
+      if (ordersQueued.isEmpty) {
+        ordersQueued = derivedUnits;
+      }
       int getOrderIndex = Random().nextInt(ordersQueued.length);
-      print(ordersQueued);
+      //print(ordersQueued);
       Unit newUnit = ordersQueued.removeAt(getOrderIndex);
 
       //derivedUnits[Random().nextInt(derivedUnits.length)];
@@ -86,7 +89,7 @@ class Board {
       orderHexes.addAll(orders[1].hex.toBaseHexes());
       orderHexes.addAll(orders[2].hex.toBaseHexes());
     }
-    print(orderHexes);
+    // print(orderHexes);
 
     //for each order, look at it's base components
     // for (int k = 0; k < 3; k++) {

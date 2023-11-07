@@ -205,17 +205,17 @@ class Hex {
     );
   }
 
-  void main() {
-    // Example usage
-    List<Color> colors = [
-      Colors.red,
-      Colors.green,
-      Colors.blue,
-    ];
-    //test of average color
-    //Color avgColor = averageColor(colors);
-    //print('Average Color: $avgColor');
-  }
+  // void main() {
+  // Example usage
+  // List<Color> colors = [
+  //   Colors.red,
+  //   Colors.green,
+  //   Colors.blue,
+  // ];
+  // test of average color
+  // Color avgColor = averageColor(colors);
+  // print('Average Color: $avgColor');
+  // }
   // double fontSize() {
   //   //check if it matches a derived unit
   //   for (Unit unit in derivedUnits) {

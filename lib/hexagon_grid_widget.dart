@@ -379,6 +379,7 @@ class _HexGridState extends State<HexGrid> {
   //the display hex at bottom
   Widget _buildBigHexagon(double offsetY, double offsetX, String label, int index, Color hexColor) {
     return Container(
+      padding: const EdgeInsets.all(0.01),
       // top: offsetY + radius * 2,
       // left: offsetX + radius * sqrt(3),
       child: GestureDetector(
