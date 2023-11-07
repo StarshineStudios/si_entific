@@ -18,11 +18,18 @@ class Board {
 
   List<Hex> hexes = [Hex(), Hex(), Hex(), Hex(meter: 1), Hex(), Hex(), Hex()];
   //List<Order> orders = [Order(), Order(), Order()];
-  late List<Order> orders = [
-    Order(hex: Hex(meter: 1), points: 1, quantityName: 'length', unitName: 'meter'),
-    Order(hex: Hex(second: 1), points: 1, quantityName: 'time', unitName: 'second'),
-    Order(hex: Hex(kilogram: 1), points: 1, quantityName: 'mass', unitName: 'kilogram'),
+  late List<Unit> orders = [
+    // Unit(hex: Hex(meter: 1), points: 1, quantityName: 'length', unitName: 'meter'),
+    // Unit(hex: Hex(second: 1), points: 1, quantityName: 'time', unitName: 'second'),
+    // Unit(hex: Hex(kilogram: 1), points: 1, quantityName: 'mass', unitName: 'kilogram'),
+
+    Unit('meter', 'm', 'length', Hex(meter: 1)),
+
+    Unit('second', 's', 'time', Hex(second: 1)),
+    Unit('kilogram', 'kg', 'mass', Hex(kilogram: 1)),
   ];
+
+  late List<Order> ordersQueued = derivedUnits;
 
   late List<Hex> orderHexes = [];
   int score = 0;
@@ -37,12 +44,13 @@ class Board {
       score += orders[orderIndex].points;
 
       Unit newUnit = derivedUnits[Random().nextInt(derivedUnits.length)];
-      orders[orderIndex].change(
-        newUnit.hex,
-        newUnit.hex.difficulty(),
-        newUnit.quantity,
-        newUnit.name,
-      );
+      // orders[orderIndex].change(
+      //   newUnit.hex,
+      //   newUnit.hex.difficulty(),
+      //   newUnit.quantity,
+      //   newUnit.name,
+      // );
+      orders[orderIndex] = newUnit;
       hexes[hexIndex].clear();
     }
   }
